@@ -239,6 +239,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  horizontalInput: 0
+  verticalInput: 0
+  xBoundary: 10.1
+  yBoundary: 4
+  laserPrefab: {fileID: 4720049583571746514, guid: bc79f89dfff192449bd309a5a6dcc46b, type: 3}
+  laserOffset: {x: 0, y: 1, z: 0}
 --- !u!65 &1692309153
 BoxCollider:
   m_ObjectHideFlags: 0
