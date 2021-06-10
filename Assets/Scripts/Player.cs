@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
@@ -12,13 +13,25 @@ public class Player : MonoBehaviour
     [SerializeField] private float yBoundary = 4.0f;
     [Space]
     [SerializeField] private Transform laserPrefab;
+    [Space]
     [SerializeField] private Vector3 laserOffset;
+    [Space]
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private float nextFire = -1.0f;
 
     private float _horizontalInput;
     private float _verticalInput;
-    
+    private SpawnController _spawnController;
+
+    private void Awake()
+    {
+        _spawnController = FindObjectOfType<SpawnController>();
+        if (_spawnController == null)
+        {
+            Debug.LogWarning("Spawn Controller is NULL!");
+        }
+    }
+
     private void Start()
     {
         transform.position = new Vector3(0, -3.0f);
@@ -65,6 +78,7 @@ public class Player : MonoBehaviour
         if (playerLives <= 0)
         {
             playerLives = 0;
+            _spawnController.OnPlayerDeath();
             Destroy(gameObject);
         }
     }
