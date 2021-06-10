@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private int playerLives = 5;
     [SerializeField] private int speed = 5;
-    private float _horizontalInput;
-    private float _verticalInput;
     [Space]
     [SerializeField] private float xBoundary = 10.1f;
     [SerializeField] private float yBoundary = 4.0f;
@@ -17,18 +16,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private float nextFire = -1.0f;
 
+    private float _horizontalInput;
+    private float _verticalInput;
+    
     private void Start()
     {
         transform.position = new Vector3(0, -3.0f);
     }
-
-
     private void Update()
     {
         CalculateMovement();
         FireLaser();
     }
-
     private void CalculateMovement()
     {
         _horizontalInput = Input.GetAxis("Horizontal");
@@ -51,13 +50,22 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
         }
     }
-
     private void FireLaser()
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+        }
+    }
+    public void Damage(int damage)
+    {
+        playerLives -= damage;
+
+        if (playerLives <= 0)
+        {
+            playerLives = 0;
+            Destroy(gameObject);
         }
     }
 }
