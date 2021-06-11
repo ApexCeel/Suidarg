@@ -12,7 +12,7 @@ public class Laser : MonoBehaviour
 
    private void Update()
    {
-      transform.Translate(Vector3.up * (speed *Time.deltaTime));
+      transform.Translate(Vector3.right * (speed *Time.deltaTime));
 
       if (transform.position.y > maxDistance)
       {
