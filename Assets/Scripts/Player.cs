@@ -22,9 +22,12 @@ public class Player : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
     private SpawnController _spawnController;
+    private Transform _pTransform;
+    
 
     private void Awake()
     {
+        _pTransform = transform;
         _spawnController = FindObjectOfType<SpawnController>();
         if (_spawnController == null)
         {
@@ -48,20 +51,12 @@ public class Player : MonoBehaviour
 
         var direction = new Vector3(_horizontalInput, _verticalInput, 0);
 
-        transform.Translate(direction * (speed * Time.deltaTime));
+        _pTransform.Translate(direction * (speed * Time.deltaTime));
 
-        var transPos = transform.position;
-        transPos = new Vector3(transPos.x, Mathf.Clamp(transPos.y, -yBoundary, yBoundary), transPos.z);
+        var transPos = _pTransform.position;
+        transPos = new Vector3(Mathf.Clamp(transPos.x, -xBoundary, xBoundary), Mathf.Clamp(transPos.y, -yBoundary, yBoundary), transPos.z);
         transform.position = transPos;
 
-        if (transform.position.x > xBoundary)
-        {
-            transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x < -xBoundary)
-        {
-            transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
-        }
     }
     private void FireLaser()
     {

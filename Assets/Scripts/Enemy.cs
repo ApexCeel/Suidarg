@@ -12,11 +12,11 @@ public class Enemy : MonoBehaviour
 
    private void Update()
    {
-      transform.Translate(Vector3.down * (speed * Time.deltaTime));
+      transform.Translate(Vector3.left * (speed * Time.deltaTime));
 
-      if (transform.position.y < -4.0f)
+      if (transform.position.x < -14.0f)
       {
-         transform.position = new Vector3(UnityEngine.Random.Range(-9.0f, 9.0f), 6, 0);
+         transform.position = new Vector3(14.5f, UnityEngine.Random.Range(-6.0f, 8.0f), 0);
       }
    }
 

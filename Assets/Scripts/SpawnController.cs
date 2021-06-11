@@ -22,7 +22,7 @@ public class SpawnController : MonoBehaviour
    {
       while (!_stopSpawning)
       {
-         var posOffset = new Vector3(Random.Range(-9.0f, 9.0f), 0);
+         var posOffset = new Vector3(0, Random.Range(-5.0f, 8.0f));
          var enemy = Instantiate(enemyPrefab, transform.position + posOffset, Quaternion.identity);
          enemy.transform.parent = enemyContainer;
          yield return new WaitForSeconds(waitTime);
