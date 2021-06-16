@@ -317,7 +317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc952c898d33384b9d7ec953236b726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpPrefab: {fileID: 2091546965806469626, guid: aa0d1bff65c3d204f8a7c82151aac7bf, type: 3}
   enemyPrefab: {fileID: 7475754197484879688, guid: 487efd625e1f6a6489e89b1e305a412b, type: 3}
+  powerUpWaitTime: 0.4
   waitTime: 0.5
   enemyContainer: {fileID: 1475862680}
 --- !u!4 &318766412
@@ -470,12 +472,36 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
       propertyPath: xBoundary
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
       propertyPath: yBoundary
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: waveBeamPrefab
+      value: 
+      objectReference: {fileID: 3621794300176836235, guid: 9a7465e45db6f884cb135ee13b9b7ac6, type: 3}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: isWaveBeamActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: tripleShotPrefab
+      value: 
+      objectReference: {fileID: 2932142131320204777, guid: aceaf5d5bc1f9374d9e3e8b5106fab32, type: 3}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: isTripleShotActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 976014871738439790, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
       propertyPath: m_RootOrder

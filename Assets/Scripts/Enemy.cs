@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
       else if (other.CompareTag("Player"))
       {
-         print("Hit the Player");
+         // print("Hit the Player");
          // other.GetComponent<Player>().Damage(damage);
          if(other.TryGetComponent(out Player player))
          {

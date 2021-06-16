@@ -13,11 +13,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float yBoundary = 4.0f;
     [Space]
     [SerializeField] private Transform laserPrefab;
+    [SerializeField] private Transform waveBeamPrefab;
+    [SerializeField] private Transform tripleShotPrefab;
     [Space]
     [SerializeField] private Vector3 laserOffset;
     [Space]
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private float nextFire = -1.0f;
+    [Space] 
+    [SerializeField] private bool isWaveBeamActive;
+    [SerializeField] private bool isTripleShotActive;
+    [Space]
+    [SerializeField] private float cooldownTime = 5.0f;
 
     private float _horizontalInput;
     private float _verticalInput;
@@ -28,6 +35,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _pTransform = transform;
+        
         _spawnController = FindObjectOfType<SpawnController>();
         if (_spawnController == null)
         {
@@ -54,7 +62,9 @@ public class Player : MonoBehaviour
         _pTransform.Translate(direction * (speed * Time.deltaTime));
 
         var transPos = _pTransform.position;
-        transPos = new Vector3(Mathf.Clamp(transPos.x, -xBoundary, xBoundary), Mathf.Clamp(transPos.y, -yBoundary, yBoundary), transPos.z);
+        transPos = new Vector3(Mathf.Clamp(transPos.x, -xBoundary, xBoundary), 
+                               Mathf.Clamp(transPos.y, -yBoundary, yBoundary), 
+                               transPos.z);
         transform.position = transPos;
 
     }
@@ -63,8 +73,25 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+            if (isWaveBeamActive)
+            {
+                Instantiate(waveBeamPrefab, transform.position + laserOffset, Quaternion.identity);
+            }
+            else if (isTripleShotActive)
+            {
+                Instantiate(tripleShotPrefab, transform.position + laserOffset, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+            }
         }
+    }
+    private IEnumerator PowerDownRoutine()
+    {
+        yield return new WaitForSeconds(cooldownTime);
+        isTripleShotActive = false;
+        
     }
     public void Damage(int damage)
     {
@@ -76,5 +103,15 @@ public class Player : MonoBehaviour
             _spawnController.OnPlayerDeath();
             Destroy(gameObject);
         }
+    }
+    public void ActivateTripleShot()
+    {
+        isTripleShotActive = true;
+
+        StartCoroutine(PowerDownRoutine());
+    }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }
