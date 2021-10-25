@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int playerLives = 5;
+    [SerializeField] private int playerLives = 3;
     [SerializeField] private int speed = 5;
     [Space] 
     [SerializeField] private int playerScore;
     [Space]
-    [SerializeField] private float xBoundary = 10.1f;
-    [SerializeField] private float yBoundary = 4.0f;
+    [SerializeField] private float xBoundary = 14.0f;
+    [SerializeField] private float yBoundary = 9.0f;
     [Space]
     [SerializeField] private Transform laserPrefab;
     [SerializeField] private Transform waveBeamPrefab;
@@ -121,11 +121,13 @@ public class Player : MonoBehaviour
         }
         
         playerLives -= damage;
+        FindObjectOfType<UIController>().UpdateLives(playerLives);
 
         if (playerLives <= 0)
         {
             playerLives = 0;
             _spawnController.OnPlayerDeath();
+            
             Destroy(gameObject);
         }
     }

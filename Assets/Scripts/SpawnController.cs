@@ -52,5 +52,6 @@ public class SpawnController : MonoBehaviour
    public void OnPlayerDeath()
    {
       _stopSpawning = true;
+      
    }
 }
