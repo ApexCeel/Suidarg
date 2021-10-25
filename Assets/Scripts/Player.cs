@@ -5,7 +5,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private int playerLives = 5;
     [SerializeField] private int speed = 5;
-    [Space] [SerializeField] private int playerScore;
+    [Space] 
+    [SerializeField] private int playerScore;
     [Space]
     [SerializeField] private float xBoundary = 10.1f;
     [SerializeField] private float yBoundary = 4.0f;

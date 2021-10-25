@@ -38,9 +38,7 @@ public class Enemy : MonoBehaviour
 
    private void ResetToStart()
    {
-      
       transform.position = new Vector3(14.5f, UnityEngine.Random.Range(-6.0f, 8.0f), 0);
-      
    }
 
    private void OnTriggerEnter2D(Collider2D other)
@@ -52,19 +50,16 @@ public class Enemy : MonoBehaviour
          Destroy(other.gameObject);
          
          Destroy(gameObject);
-         // possible bug related shots fired that kill after player death. 
+         
          // add points
-         _player.AddScore(scoreValue);
+         if (_player != null)
+         {
+            _player.AddScore(scoreValue);
+         }
       }
 
       else if (other.CompareTag("Player"))
       {
-         // print("Hit the Player");
-         // other.GetComponent<Player>().Damage(damage);
-         // if(other.TryGetComponent(out Player player))
-         // {
-         //    player.Damage(damage);
-         // }
          _player.Damage(damage);
          Destroy(gameObject);
       }
