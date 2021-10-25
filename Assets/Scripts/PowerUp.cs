@@ -43,6 +43,7 @@ public class PowerUp : MonoBehaviour
             break;
           case 2:
             print("Collected shield power up");
+            player.ActivateShields();
             break;
         }
         

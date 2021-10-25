@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private int playerLives = 5;
     [SerializeField] private int speed = 5;
+    [Space] [SerializeField] private int playerScore;
     [Space]
     [SerializeField] private float xBoundary = 10.1f;
     [SerializeField] private float yBoundary = 4.0f;
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform laserPrefab;
     [SerializeField] private Transform waveBeamPrefab;
     [SerializeField] private Transform tripleShotPrefab;
+    [SerializeField] private Transform shipShieldPrefab;
     [Space]
     [SerializeField] private Vector3 laserOffset;
     [Space]
@@ -20,6 +22,7 @@ public class Player : MonoBehaviour
     [Space] 
     [SerializeField] private bool isWaveBeamActive;
     [SerializeField] private bool isTripleShotActive;
+    [SerializeField] private bool isShieldActive;
     [SerializeField] private float speedBonus = 1;
     [Space]
     [SerializeField] private float powerUpCooldownTime = 5.0f;
@@ -98,8 +101,24 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(powerUpCooldownTime);
         _speedBonus = 1;
     }
+
+    public void AddScore(int score)
+    {
+        playerScore += score;
+        FindObjectOfType<UIController>().UpdateScore(playerScore);
+    }
     public void Damage(int damage)
     {
+        // If shields are active
+        if (isShieldActive)
+        {
+            // do nothing...
+            print("Shields took a hit");
+            // deactivate shields
+            DeactivateShields();
+            return;
+        }
+        
         playerLives -= damage;
 
         if (playerLives <= 0)
@@ -108,6 +127,18 @@ public class Player : MonoBehaviour
             _spawnController.OnPlayerDeath();
             Destroy(gameObject);
         }
+    }
+    public void ActivateShields()
+    {
+        isShieldActive = true;
+        shipShieldPrefab.gameObject.SetActive(true);
+        print("Shields are active");
+    }
+    private void DeactivateShields()
+    {
+        isShieldActive = false;
+        shipShieldPrefab.gameObject.SetActive(false);
+        print("Shield is deactivated.");
     }
     public void ActivateTripleShot()
     {

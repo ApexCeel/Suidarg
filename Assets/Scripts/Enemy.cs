@@ -9,8 +9,14 @@ public class Enemy : MonoBehaviour
    
    [SerializeField] private int speed = 4;
    [SerializeField] private int damage = 1;
-    
+   [SerializeField] private int scoreValue = 5;
 
+   private Player _player;
+
+   private void Awake()
+   {
+      _player = FindObjectOfType<Player>();
+   }
 
    private void Update()
    {
@@ -42,19 +48,24 @@ public class Enemy : MonoBehaviour
       if (other.CompareTag("Laser"))
       {
          // print("Hit by a laser");
-         print("Add point to playerPoints");
+         // print("Add point to playerPoints");
          Destroy(other.gameObject);
+         
          Destroy(gameObject);
+         // possible bug related shots fired that kill after player death. 
+         // add points
+         _player.AddScore(scoreValue);
       }
 
       else if (other.CompareTag("Player"))
       {
          // print("Hit the Player");
          // other.GetComponent<Player>().Damage(damage);
-         if(other.TryGetComponent(out Player player))
-         {
-            player.Damage(damage);
-         }
+         // if(other.TryGetComponent(out Player player))
+         // {
+         //    player.Damage(damage);
+         // }
+         _player.Damage(damage);
          Destroy(gameObject);
       }
    }

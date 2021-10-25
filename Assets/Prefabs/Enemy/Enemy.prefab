@@ -94,9 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  thrust: 1174
   damage: 1
-  moveTime: 2
 --- !u!1 &9197413678722129686
 GameObject:
   m_ObjectHideFlags: 0
