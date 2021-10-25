@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Principal;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -23,11 +20,13 @@ public class Player : MonoBehaviour
     [Space] 
     [SerializeField] private bool isWaveBeamActive;
     [SerializeField] private bool isTripleShotActive;
+    [SerializeField] private float speedBonus = 1;
     [Space]
-    [SerializeField] private float cooldownTime = 5.0f;
+    [SerializeField] private float powerUpCooldownTime = 5.0f;
 
     private float _horizontalInput;
     private float _verticalInput;
+    private float _speedBonus = 1;
     private SpawnController _spawnController;
     private Transform _pTransform;
     
@@ -39,7 +38,7 @@ public class Player : MonoBehaviour
         _spawnController = FindObjectOfType<SpawnController>();
         if (_spawnController == null)
         {
-            Debug.LogWarning("Spawn Controller is NULL!");
+            Debug.LogError("Spawn Controller is NULL!");
         }
     }
 
@@ -59,11 +58,11 @@ public class Player : MonoBehaviour
 
         var direction = new Vector3(_horizontalInput, _verticalInput, 0);
 
-        _pTransform.Translate(direction * (speed * Time.deltaTime));
+        _pTransform.Translate(direction * (speed * Time.deltaTime * _speedBonus));
 
         var transPos = _pTransform.position;
         transPos = new Vector3(Mathf.Clamp(transPos.x, -xBoundary, xBoundary), 
-                               Mathf.Clamp(transPos.y, -yBoundary, yBoundary), 
+                               Mathf.Clamp(transPos.y, -yBoundary + 4, yBoundary), // Remove magic number
                                transPos.z);
         transform.position = transPos;
 
@@ -73,6 +72,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
+            
             if (isWaveBeamActive)
             {
                 Instantiate(waveBeamPrefab, transform.position + laserOffset, Quaternion.identity);
@@ -89,9 +89,14 @@ public class Player : MonoBehaviour
     }
     private IEnumerator PowerDownRoutine()
     {
-        yield return new WaitForSeconds(cooldownTime);
+        yield return new WaitForSeconds(powerUpCooldownTime);
         isTripleShotActive = false;
         
+    }
+    private IEnumerator SpeedDownRoutine()
+    {
+        yield return new WaitForSeconds(powerUpCooldownTime);
+        _speedBonus = 1;
     }
     public void Damage(int damage)
     {
@@ -109,6 +114,11 @@ public class Player : MonoBehaviour
         isTripleShotActive = true;
 
         StartCoroutine(PowerDownRoutine());
+    }
+    public void ActivateSpeedBoost()
+    {
+        _speedBonus = speedBonus;
+        StartCoroutine(SpeedDownRoutine());
     }
     private void OnDisable()
     {
