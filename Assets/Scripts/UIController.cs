@@ -32,13 +32,14 @@ public class UIController : MonoBehaviour
 
         if (currentLives <= 0)
         {
-            DisplayGameOver();
+            GameOverSequence();
         }
 
     }
 
-    private void DisplayGameOver()
+    private void GameOverSequence()
     {
+        FindObjectOfType<GameManager>().GameOver();
         gameOverText.gameObject.SetActive(true);
         restartText.gameObject.SetActive(true);
         StartCoroutine(FlickerRoutine());
