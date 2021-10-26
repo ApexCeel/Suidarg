@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
     private float _speedBonus = 1;
-    private SpawnController _spawnController;
+    private SpawnManager _spawnManager;
     private Transform _pTransform;
     
 
@@ -39,8 +39,8 @@ public class Player : MonoBehaviour
     {
         _pTransform = transform;
         
-        _spawnController = FindObjectOfType<SpawnController>();
-        if (_spawnController == null)
+        _spawnManager = FindObjectOfType<SpawnManager>();
+        if (_spawnManager == null)
         {
             Debug.LogError("Spawn Controller is NULL!");
         }
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
         if (playerLives <= 0)
         {
             playerLives = 0;
-            _spawnController.OnPlayerDeath();
+            _spawnManager.OnPlayerDeath();
             
             Destroy(gameObject);
         }

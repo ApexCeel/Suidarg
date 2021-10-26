@@ -10,12 +10,18 @@ public class Enemy : MonoBehaviour
    [SerializeField] private int speed = 4;
    [SerializeField] private int damage = 1;
    [SerializeField] private int scoreValue = 5;
+   [Space]
+   [SerializeField] private Animator explosionAnim;
 
    private Player _player;
+   private SpriteRenderer _renderer;
+   private static readonly int DeathTrigger = Animator.StringToHash("DeathTrigger");
 
    private void Awake()
    {
       _player = FindObjectOfType<Player>();
+      explosionAnim = GetComponentInChildren<Animator>();
+      _renderer = GetComponent<SpriteRenderer>();
    }
 
    private void Update()
@@ -45,11 +51,11 @@ public class Enemy : MonoBehaviour
    {
       if (other.CompareTag("Laser"))
       {
-         // print("Hit by a laser");
-         // print("Add point to playerPoints");
-         Destroy(other.gameObject);
          
-         Destroy(gameObject);
+         Destroy(other.gameObject);
+         explosionAnim.SetTrigger(DeathTrigger);
+         speed = 0;
+         Destroy(gameObject, 0.38f);
          
          // add points
          if (_player != null)
@@ -61,7 +67,15 @@ public class Enemy : MonoBehaviour
       else if (other.CompareTag("Player"))
       {
          _player.Damage(damage);
-         Destroy(gameObject);
+         _renderer.gameObject.SetActive(false);
+         explosionAnim.SetTrigger(DeathTrigger);
+         speed = 0;
+         Destroy(gameObject, 0.38f);
       }
+   }
+
+   private void OnDestroy()
+   {
+      explosionAnim.ResetTrigger(DeathTrigger);
    }
 }

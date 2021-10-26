@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SpawnController : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
    [SerializeField] private GameObject[] powerUps;
    [SerializeField] private GameObject enemyPrefab;

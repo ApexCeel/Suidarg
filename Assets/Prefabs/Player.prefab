@@ -156,11 +156,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLives: 5
   speed: 5
+  playerScore: 0
   xBoundary: 10.1
   yBoundary: 4
   laserPrefab: {fileID: 4824981844363298669, guid: 92d6d185a6b86cf4a87f22da8ba6add5, type: 3}
   waveBeamPrefab: {fileID: 0}
   tripleShotPrefab: {fileID: 0}
+  shipShieldPrefab: {fileID: 0}
   laserOffset: {x: 1.25, y: 0, z: 0}
   fireRate: 0.15
   nextFire: -1
