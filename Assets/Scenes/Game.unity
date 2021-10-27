@@ -419,6 +419,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &369756411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7166911382771226225, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+  m_PrefabInstance: {fileID: 976014871249858000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &371279914
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +499,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371279914}
   m_CullTransparentMesh: 1
+--- !u!4 &380683936 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6978260682334704939, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+  m_PrefabInstance: {fileID: 976014871249858000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &833390582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
       propertyPath: fireRate
-      value: 0.2
+      value: 0.175
       objectReference: {fileID: 0}
     - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
       propertyPath: xBoundary
@@ -1053,9 +1063,17 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: leftDamageAnim
+      value: 
+      objectReference: {fileID: 380683936}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
       propertyPath: waveBeamPrefab
       value: 
       objectReference: {fileID: 3621794300176836235, guid: 9a7465e45db6f884cb135ee13b9b7ac6, type: 3}
+    - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
+      propertyPath: rightDamageAnim
+      value: 
+      objectReference: {fileID: 369756411}
     - target: {fileID: 976014871738439788, guid: 1508633a16c5e0449b5241417e7d2e6f, type: 3}
       propertyPath: isWaveBeamActive
       value: 0
@@ -1131,7 +1149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8924028948414704194, guid: 791aedbf3e85ab74baba5da164a67ba6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.54
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: 8924028948414704194, guid: 791aedbf3e85ab74baba5da164a67ba6, type: 3}
       propertyPath: m_LocalPosition.y

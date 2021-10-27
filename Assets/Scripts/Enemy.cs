@@ -14,14 +14,14 @@ public class Enemy : MonoBehaviour
    [SerializeField] private Animator explosionAnim;
 
    private Player _player;
-   private SpriteRenderer _renderer;
+   
    private static readonly int DeathTrigger = Animator.StringToHash("DeathTrigger");
 
    private void Awake()
    {
       _player = FindObjectOfType<Player>();
       explosionAnim = GetComponentInChildren<Animator>();
-      _renderer = GetComponent<SpriteRenderer>();
+      
    }
 
    private void Update()
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
       else if (other.CompareTag("Player"))
       {
          _player.Damage(damage);
-         _renderer.gameObject.SetActive(false);
+         
          explosionAnim.SetTrigger(DeathTrigger);
          speed = 0;
          Destroy(gameObject, 0.38f);

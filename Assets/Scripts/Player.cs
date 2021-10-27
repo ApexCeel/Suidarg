@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform waveBeamPrefab;
     [SerializeField] private Transform tripleShotPrefab;
     [SerializeField] private Transform shipShieldPrefab;
+    [Space] [SerializeField] private Transform leftDamageAnim;
+    [SerializeField] private Transform rightDamageAnim;
     [Space]
     [SerializeField] private Vector3 laserOffset;
     [Space]
@@ -122,6 +124,15 @@ public class Player : MonoBehaviour
         
         playerLives -= damage;
         FindObjectOfType<UIController>().UpdateLives(playerLives);
+        switch (playerLives)
+        {
+            case 2:
+                leftDamageAnim.gameObject.SetActive(true);
+                break;
+            case 1:
+                rightDamageAnim.gameObject.SetActive(true);
+                break;
+        }
 
         if (playerLives <= 0)
         {

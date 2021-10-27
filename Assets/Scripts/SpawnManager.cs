@@ -21,8 +21,12 @@ public class SpawnManager : MonoBehaviour
 
    private void Start()
    {
-      StartCoroutine(EnemySpawnRoutine());
+      // StartSpawning();
+   }
 
+   public void StartSpawning()
+   {
+      StartCoroutine(EnemySpawnRoutine());
       StartCoroutine(PowerUpSpawnRoutine());
    }
 

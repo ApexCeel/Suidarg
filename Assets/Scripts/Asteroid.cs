@@ -11,10 +11,12 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private GameObject asteroidExplosion;
 
     private SpriteRenderer _renderer;
+    private SpawnManager _spawnManager;
 
     private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
+        _spawnManager = FindObjectOfType<SpawnManager>();
     }
 
     private void Update()
@@ -29,6 +31,7 @@ public class Asteroid : MonoBehaviour
             Destroy(other);
             _renderer.gameObject.SetActive(false);
             Instantiate(asteroidExplosion, transform.localPosition, quaternion.identity);
+            _spawnManager.StartSpawning();
             Destroy(gameObject, 0.48f);
         }
     }
