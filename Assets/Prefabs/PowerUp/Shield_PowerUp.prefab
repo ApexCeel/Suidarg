@@ -146,3 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   powerUpID: 2
+  powerUpClip: {fileID: 8300000, guid: 9001da3025179354fbf20b1e6ad04b34, type: 3}

@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform waveBeamPrefab;
     [SerializeField] private Transform tripleShotPrefab;
     [SerializeField] private Transform shipShieldPrefab;
-    [Space] [SerializeField] private Transform leftDamageAnim;
+    [Space] 
+    [SerializeField] private Transform leftDamageAnim;
     [SerializeField] private Transform rightDamageAnim;
     [Space]
     [SerializeField] private Vector3 laserOffset;
@@ -29,6 +30,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float speedBonus = 1;
     [Space]
     [SerializeField] private float powerUpCooldownTime = 5.0f;
+    [Space] 
+    [SerializeField] private AudioClip laserClip;
+    private AudioSource _audioSource;
 
     private float _horizontalInput;
     private float _verticalInput;
@@ -45,6 +49,16 @@ public class Player : MonoBehaviour
         if (_spawnManager == null)
         {
             Debug.LogError("Spawn Controller is NULL!");
+        }
+
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            Debug.LogError("Audio Source on Player is NULL!");
+        }
+        else
+        {
+            _audioSource.clip = laserClip;
         }
     }
 
@@ -91,6 +105,10 @@ public class Player : MonoBehaviour
             {
                 Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
             }
+            
+            //Play laser sound effect
+            _audioSource.Play();
+            
         }
     }
     private IEnumerator PowerDownRoutine()

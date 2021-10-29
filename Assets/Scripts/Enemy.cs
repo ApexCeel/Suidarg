@@ -12,7 +12,12 @@ public class Enemy : MonoBehaviour
    [SerializeField] private int scoreValue = 5;
    [Space]
    [SerializeField] private Animator explosionAnim;
+   [Space] 
+   [SerializeField] private AudioClip explosionClip;
 
+   [Space] [SerializeField] private GameObject laserPrefab;
+
+   private AudioSource _audioSource;
    private Player _player;
    
    private static readonly int DeathTrigger = Animator.StringToHash("DeathTrigger");
@@ -21,11 +26,22 @@ public class Enemy : MonoBehaviour
    {
       _player = FindObjectOfType<Player>();
       explosionAnim = GetComponentInChildren<Animator>();
-      
+
+      _audioSource = GetComponent<AudioSource>();
+      if (_audioSource == null)
+      {
+         Debug.LogError("Audio Source on Enemy is NULL!");
+      }
+      else
+      {
+         _audioSource.clip = explosionClip;
+      }
+
    }
 
    private void Update()
    {
+      StartCoroutine(FireLaserRoutine());
       if (transform.position.x < -14.0f)
       {
          ResetToStart();
@@ -33,6 +49,14 @@ public class Enemy : MonoBehaviour
       else
       {
          Movement();
+      }
+   }
+
+   private IEnumerator FireLaserRoutine()
+   {
+      while (true)
+      {
+         
       }
    }
 
@@ -53,9 +77,11 @@ public class Enemy : MonoBehaviour
       {
          
          Destroy(other.gameObject);
+         _audioSource.Play();
          explosionAnim.SetTrigger(DeathTrigger);
          speed = 0;
-         Destroy(gameObject, 0.38f);
+         Destroy(GetComponent<Collider2D>());
+         Destroy(gameObject, 0.42f);
          
          // add points
          if (_player != null)
@@ -67,10 +93,10 @@ public class Enemy : MonoBehaviour
       else if (other.CompareTag("Player"))
       {
          _player.Damage(damage);
-         
+         _audioSource.Play();
          explosionAnim.SetTrigger(DeathTrigger);
          speed = 0;
-         Destroy(gameObject, 0.38f);
+         Destroy(gameObject, 0.42f);
       }
    }
 
