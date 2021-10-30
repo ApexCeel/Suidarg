@@ -10,9 +10,23 @@ public class Laser : MonoBehaviour
    [SerializeField] private int speed = 10;
    [SerializeField] private int maxDistance = 12;
 
+   [SerializeField] private bool isEnemyLaser;
+
    private void Update()
    {
-      transform.Translate(Vector3.right * (speed *Time.deltaTime));
+      if (!isEnemyLaser)
+      {
+         MoveRight();
+      }
+      else
+      {
+         MoveLeft();
+      }
+   }
+
+   private void MoveLeft()
+   {
+      transform.Translate(Vector3.left * (speed * Time.deltaTime));
 
       if (transform.position.x > maxDistance)
       {
@@ -20,6 +34,22 @@ public class Laser : MonoBehaviour
          {
             Destroy(transform.parent.gameObject);
          }
+
+         Destroy(gameObject);
+      }
+   }
+
+   private void MoveRight()
+   {
+      transform.Translate(Vector3.right * (speed * Time.deltaTime));
+
+      if (transform.position.x > maxDistance)
+      {
+         if (transform.parent != null)
+         {
+            Destroy(transform.parent.gameObject);
+         }
+
          Destroy(gameObject);
       }
    }

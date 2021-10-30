@@ -14,8 +14,10 @@ public class Enemy : MonoBehaviour
    [SerializeField] private Animator explosionAnim;
    [Space] 
    [SerializeField] private AudioClip explosionClip;
+   [Space] 
+   [SerializeField] private GameObject laserPrefab;
 
-   [Space] [SerializeField] private GameObject laserPrefab;
+   [SerializeField] private Vector3 laserOffset;
 
    private AudioSource _audioSource;
    private Player _player;
@@ -39,9 +41,14 @@ public class Enemy : MonoBehaviour
 
    }
 
-   private void Update()
+   private void Start()
    {
       StartCoroutine(FireLaserRoutine());
+   }
+
+   private void Update()
+   {
+      
       if (transform.position.x < -14.0f)
       {
          ResetToStart();
@@ -56,7 +63,8 @@ public class Enemy : MonoBehaviour
    {
       while (true)
       {
-         
+         Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
+         yield return new WaitForSeconds(3.0f);
       }
    }
 

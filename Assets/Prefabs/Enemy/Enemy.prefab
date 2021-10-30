@@ -196,6 +196,8 @@ MonoBehaviour:
   scoreValue: 5
   explosionAnim: {fileID: 7304226916572755539}
   explosionClip: {fileID: 8300000, guid: ea6cda4ba584c2946a1a721dbe768e78, type: 3}
+  laserPrefab: {fileID: 3671493065660688248, guid: 9be229b628081884da5aed49dc53f9c1, type: 3}
+  laserOffset: {x: -1, y: 0, z: 0}
 --- !u!1 &8134463316113820432
 GameObject:
   m_ObjectHideFlags: 0
