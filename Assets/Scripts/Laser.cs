@@ -10,7 +10,7 @@ public class Laser : MonoBehaviour
    [SerializeField] private int speed = 10;
    [SerializeField] private int maxDistance = 12;
 
-   [SerializeField] private bool isEnemyLaser;
+   [SerializeField] public bool isEnemyLaser;
 
    private void Update()
    {
