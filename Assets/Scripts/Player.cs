@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
     }
     private void CalculateMovement()
     {
+        // transform.Translate(Vector3.right * (speed * Time.deltaTime));
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
 

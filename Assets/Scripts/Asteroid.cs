@@ -35,7 +35,7 @@ public class Asteroid : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward * (rotateSpeed * Time.deltaTime));
     }
 
     private void OnTriggerEnter2D(Collider2D other)

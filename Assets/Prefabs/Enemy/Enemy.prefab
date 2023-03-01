@@ -192,9 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f91f9b864bf2e47818b16d0a4f94b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearMovement: 0
+  linearMovement: 1
   sineWaveMovement: 0
-  circularMovement: 1
+  circularMovement: 0
   amplitude: 2
   frequency: 10
   speed: 4
@@ -335,8 +335,8 @@ Transform:
   m_GameObject: {fileID: 9197413678722129686}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7028034672449065457}
   m_RootOrder: 0
