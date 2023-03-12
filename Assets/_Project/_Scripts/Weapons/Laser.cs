@@ -8,26 +8,32 @@ public class Laser : MonoBehaviour
    // translate laser up at a predefined speed.
 
    [SerializeField] private int speed = 10;
-   private float maxDistance;
+   private float _maxDistance;
    [SerializeField] private float range = 12;
 
    [SerializeField] public bool isEnemyLaser;
 
    private void Start()
    {
-      maxDistance = transform.position.x + range;
+      
+      if (!isEnemyLaser)
+      {
+         _maxDistance = transform.position.x + range;
+      }
+      else
+      {
+         _maxDistance = (transform.position.x - range);
+      }
    }
 
    private void Update()
    {
       if (!isEnemyLaser)
       {
-         // maxDistance = transform.position.x + 12f;
          MoveRight();
       }
       else
       {
-         // maxDistance = transform.position.x + 12f;
          MoveLeft();
       }
       
@@ -35,9 +41,10 @@ public class Laser : MonoBehaviour
 
    private void MoveLeft()
    {
+      
       transform.Translate(Vector3.left * (speed * Time.deltaTime));
 
-      if (transform.position.x < -maxDistance)
+      if (transform.position.x < _maxDistance - 0.1f)
       {
          if (transform.parent != null)
          {
@@ -52,7 +59,7 @@ public class Laser : MonoBehaviour
    {
       transform.Translate(Vector3.right * (speed * Time.deltaTime));
 
-      if (transform.position.x > maxDistance)
+      if (transform.position.x > _maxDistance)
       {
          if (transform.parent != null)
          {

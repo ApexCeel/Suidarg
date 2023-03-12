@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,16 @@ public class EnemyMover : MonoBehaviour
     [Space]
     [Space]
     [SerializeField] private float speed = 4;
+    private Vector3 initialPosition = new Vector2();
+    
 
+    private void Start()
+    {
+        initialPosition = transform.position;
+      
+    }
+
+    
 
     public void Movement()
     {
@@ -43,7 +53,7 @@ public class EnemyMover : MonoBehaviour
 
     private void CircularMovement()
     {
-        Vector3 initialPosition = transform.position;
+        // initialPosition = transform.position;
         float x = initialPosition.x + Mathf.Cos(Time.time * rotationalSpeed) * radius;
         float y = initialPosition.y + Mathf.Sin(Time.time * rotationalSpeed) * radius;
         transform.position = new Vector3(x, y, transform.position.z);

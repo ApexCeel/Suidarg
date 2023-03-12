@@ -22,7 +22,8 @@ public class Enemy : MonoBehaviour
    private AudioSource _audioSource;
    private Player _player;
    private static readonly int DeathTrigger = Animator.StringToHash("DeathTrigger");
-   
+   private bool _shouldFire;
+
 
    private void Awake()
    {
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour
 
    private void Start()
    {
+      _shouldFire = true;
       StartCoroutine(FireLaserRoutine());
    }
 
@@ -55,7 +57,7 @@ public class Enemy : MonoBehaviour
 
    private IEnumerator FireLaserRoutine()
    {
-      while (true)
+      while (_shouldFire)
       {
          Instantiate(laserPrefab, transform.position + laserOffset, Quaternion.identity);
          yield return new WaitForSeconds(enemyRateOfFire);
@@ -66,6 +68,15 @@ public class Enemy : MonoBehaviour
    {
       if (other.CompareTag("Laser"))
       {
+         if (other.TryGetComponent(out Laser laser))
+         {
+            if (laser.isEnemyLaser)
+            {
+               Debug.Log("It is an Enemy Laser");
+               return;
+               
+            }
+         }
          
          // This is the laser hitting the enemy
          Debug.Log("HIT HIT HIT");
@@ -82,7 +93,7 @@ public class Enemy : MonoBehaviour
       // this is the enemy colliding with the player
       else if (other.CompareTag("Player"))
       {
-         Debug.Log("Collided with player SHIP");
+         // Debug.Log("Collided with player SHIP");
          _player.Damage(damage);
          Die();
          
@@ -91,6 +102,7 @@ public class Enemy : MonoBehaviour
 
    private void Die()
    {
+      _shouldFire = false;
       _audioSource.Play();
       explosionAnim.SetTrigger(DeathTrigger);
       _enemyMover.SetEnemySpeed(0);
@@ -101,5 +113,10 @@ public class Enemy : MonoBehaviour
    private void OnDestroy()
    {
       explosionAnim.ResetTrigger(DeathTrigger);
+   }
+
+   private void OnDisable()
+   {
+      StopAllCoroutines();
    }
 }
