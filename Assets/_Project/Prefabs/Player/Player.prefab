@@ -386,10 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLives: 3
-  speed: 5
   playerScore: 0
-  xBoundary: 10.1
-  yBoundary: 4
   laserPrefab: {fileID: 4824981844363298669, guid: 92d6d185a6b86cf4a87f22da8ba6add5, type: 3}
   waveBeamPrefab: {fileID: 3621794300176836235, guid: 9a7465e45db6f884cb135ee13b9b7ac6, type: 3}
   tripleShotPrefab: {fileID: 2932142131320204777, guid: aceaf5d5bc1f9374d9e3e8b5106fab32, type: 3}
@@ -402,6 +399,7 @@ MonoBehaviour:
   isWaveBeamActive: 0
   isTripleShotActive: 0
   shieldIsActive: 0
+  speed: 5
   speedBonus: 1
   powerUpCooldownTime: 5
   laserClip: {fileID: 8300000, guid: f4928cf41d3e38d48a81c91ad9795474, type: 3}

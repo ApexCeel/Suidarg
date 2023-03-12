@@ -193,12 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f91f9b864bf2e47818b16d0a4f94b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearMovement: 1
-  sineWaveMovement: 0
-  circularMovement: 0
-  amplitude: 2
-  frequency: 10
-  speed: 15
   damage: 1
   scoreValue: 5
   explosionAnim: {fileID: 7304226916572755539}
@@ -218,6 +212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df5269eca4f03f45af761fe2e247ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sineWaveMovement: 0
+  circularMovement: 0
+  amplitude: 0
+  frequency: 0
+  speed: 4
 --- !u!1 &8134463316113820432
 GameObject:
   m_ObjectHideFlags: 0

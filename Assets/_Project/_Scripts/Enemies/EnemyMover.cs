@@ -11,7 +11,7 @@ public class EnemyMover : MonoBehaviour
     [Space] [SerializeField] private float amplitude;
     [SerializeField] private float frequency;
     [Space]
-    [SerializeField] private int speed = 4;
+    [SerializeField] private float speed = 4;
 
 
     public void Movement()
