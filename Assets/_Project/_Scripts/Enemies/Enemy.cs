@@ -85,10 +85,7 @@ public class Enemy : MonoBehaviour
          Debug.Log("Collided with player SHIP");
          _player.Damage(damage);
          Die();
-         // _audioSource.Play();
-         // explosionAnim.SetTrigger(DeathTrigger);
-         // _enemyMover.SetEnemySpeed(0);
-         // Destroy(gameObject, 0.42f);
+         
       }
    }
 

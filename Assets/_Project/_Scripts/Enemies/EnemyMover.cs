@@ -7,9 +7,15 @@ public class EnemyMover : MonoBehaviour
     
     // [SerializeField] private bool linearMovement;
     [SerializeField] private bool sineWaveMovement;
-    [SerializeField] private bool circularMovement;
-    [Space] [SerializeField] private float amplitude;
+    [Space] 
+    [SerializeField] private float amplitude;
     [SerializeField] private float frequency;
+    [Space]
+    [SerializeField] private bool circularMovement;
+    [Space]
+    [SerializeField] private float rotationalSpeed = 1;
+    [SerializeField] private float radius = 1;
+    [Space]
     [Space]
     [SerializeField] private float speed = 4;
 
@@ -22,14 +28,12 @@ public class EnemyMover : MonoBehaviour
         }
         else if (circularMovement)
         {
-            CircularMovement(1.5f,10.0f);
+            CircularMovement();
         }
         else
         {
             LinearMovement();
         }
-      
-      
     }
 
     public void SetEnemySpeed(int speedToSet)
@@ -37,12 +41,13 @@ public class EnemyMover : MonoBehaviour
         speed = speedToSet;
     }
 
-    private void CircularMovement(float radius, float rotationalSpeed)
+    private void CircularMovement()
     {
-        float x = Mathf.Cos(Time.time * rotationalSpeed) * radius;
-        float y = Mathf.Sin(Time.time * rotationalSpeed) * radius;
+        Vector3 initialPosition = transform.position;
+        float x = initialPosition.x + Mathf.Cos(Time.time * rotationalSpeed) * radius;
+        float y = initialPosition.y + Mathf.Sin(Time.time * rotationalSpeed) * radius;
         transform.position = new Vector3(x, y, transform.position.z);
-        transform.Translate(Vector3.left *  (speed *Time.deltaTime));
+        transform.Translate(Vector3.left *  (speed *Time.deltaTime), Space.Self);
     }
 
     private void LinearMovement()
@@ -54,7 +59,6 @@ public class EnemyMover : MonoBehaviour
     {
         float y = Mathf.Sin(Time.time * frequency) * amplitude;
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
-      
         transform.Translate(Vector3.left * (speed * Time.deltaTime));
     }
 
@@ -62,5 +66,4 @@ public class EnemyMover : MonoBehaviour
     {
         transform.position = new Vector3(14.5f, UnityEngine.Random.Range(-6.0f, 8.0f), 0);
     }
-
 }
